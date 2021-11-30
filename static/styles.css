@@ -1,0 +1,55 @@
+.html,body{
+	overflow-x: hidden;
+	background-color: #95a2aa;
+}
+
+.navbar{
+	position: fixed;
+	background-color: #3D3C3A;
+}
+
+.sidebar{
+	position: fixed;
+	width: 20vw;
+	height: 100vh;
+	/* border: 1px solid rgb(110, 106, 106); */
+	/* background-color: rgb(110, 106, 106); */
+	background-color: #735ea3;
+}
+
+.content{
+	background-color: #a29ace;
+	width: 80vw;
+	margin-left:20vw;
+	padding-top: 10px;
+}
+
+.logo-text, .username{
+	font-size: 1.5rem !important;
+}
+
+
+.sidebar a{
+	padding: 6px 8px 6px 16px;
+	text-decoration: none;
+	font-size: 25px;
+	color: #444343;
+	display: block;
+}
+
+
+.sidebar a:hover {
+	color: #f1f1f1;
+}
+
+.active{
+	color: #f1f1f1 !important;
+}
+
+@media screen and (max-width: 450px) {
+	.sidebar a {font-size: 12px;}
+}
+
+.login_form{
+	height: 100vh;
+}
