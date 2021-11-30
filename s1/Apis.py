@@ -1,12 +1,9 @@
 from flask import Flask, jsonify, request, render_template, redirect, url_for, session
 import mysql.connector, sys, os, webbrowser
 import requests, signal
-from .dao import *
-import datetime, time
-from mysql.connector import Error
-from flask_mysqldb import MySQL
-import MySQLdb.cursors
-import re
+# from .dao import *
+# from flask_mysqldb import MySQL
+
 import uuid
 
 id = uuid.uuid4()
@@ -18,12 +15,12 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = os.environ.get("Pass")
 app.config['MYSQL_DB'] = 'DcCovidData'
 
-mysql = MySQL(app)
+# mysql = MySQL(app)
 
 # signal
 def signal_handler(sig, frame):
     print('You pressed Ctrl+C!')
-    close()
+    # close()
     sys.exit(0)
 
 # Home page
@@ -36,9 +33,8 @@ def home_page():
 def panel_page():
     return render_template('panel.html')
 
-
 if __name__ == '__main__':
-    app.secret_key = DB.secretKey
+    app.secret_key = "super secret key"
     # signal to close the DB connection
     signal.signal(signal.SIGINT, signal_handler)
     app.run(port=50000, debug=False)
