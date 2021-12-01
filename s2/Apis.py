@@ -2,9 +2,6 @@ from flask import Flask, jsonify, request, render_template, redirect, url_for, s
 import mysql.connector, sys, os, webbrowser
 import requests, signal
 # from flask_mysqldb import MySQL
-import uuid
-
-id = uuid.uuid4()
 
 app = Flask(__name__, static_url_path='/templates/static')
 

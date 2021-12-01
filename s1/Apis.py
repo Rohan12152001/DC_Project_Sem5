@@ -1,12 +1,9 @@
 from flask import Flask, jsonify, request, render_template, redirect, url_for, session
 import mysql.connector, sys, os, webbrowser
 import requests, signal
-# from .dao import *
+from s1.dao import *
+
 # from flask_mysqldb import MySQL
-
-import uuid
-
-id = uuid.uuid4()
 
 app = Flask(__name__, static_url_path='/templates/static')
 
@@ -32,6 +29,36 @@ def home_page():
 @app.route('/app/panel')
 def panel_page():
     return render_template('panel.html')
+
+# POST DATA
+@app.route('/app/data', methods=["POST"])
+def insert_data():
+    # acquire lock
+    while True:
+        # if a TRUE then acqiure in Transac
+        lockStatus = checkLockStatus()
+        print(lockStatus)
+        break
+        # if checkLockStatus():
+        #     acquireLock()
+        #     break
+
+    # form response if LOCK ACQUIRED
+    response = {
+        "state": str(request.form["state"]),
+        "todayCases": request.form["todayCases"],
+        "active": request.form["active"],
+        "todayDeaths": request.form["todayDeaths"],
+        "tests": request.form["tests"],
+    }
+
+    # insert data into DB
+    done = insertData(response)
+
+    # release lock
+    releaseLock()
+
+    return redirect(url_for('home_page'))
 
 if __name__ == '__main__':
     app.secret_key = "super secret key"
