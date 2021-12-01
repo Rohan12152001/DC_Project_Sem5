@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CovidStats</title>
+	<link href="{{url_for('static', filename = 'styles.css')}}" rel="stylesheet">
+	<link href="/static/styles.css" rel="stylesheet">
+	<link rel="shortcut icon" href="{{url_for('static', filename = 'icon.ico')}}" type="image/x-icon">
+	<link rel="icon" href="{{url_for('static', filename = 'icon.ico')}}" type="image/x-icon">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<body>
+	<nav class="nav navbar sticky-top navbar-dark bg-dark">
+		<div class="container-fluid">
+		<a class="navbar-brand logo-text" href="#">
+			<img src="{{url_for('static', filename = 'logo.jpg')}}" alt="" width="45" height="35" class="d-inline-block align-text-center">
+			CovidStats
+		</a>
+		</div>
+	</nav>
+		<div class=" sidebar">
+			<nav class="nav flex-column align-content-center">
+				<a class="nav-link" href="/app">Home</a>
+				<a class="nav-link" href="/app/series">Series</a>
+				<a class="nav-link" href="/app/results">Results</a>
+				<a class="nav-link" href="/app/fixtures">Fixtures</a>
+				<a class="nav-link" href="/app/blogPage">Blogs</a>
+			</nav>
+		</div>
+		<div class="content">
+			{% for element in states %}
+                <div class="container row justify-content-around align-items-center" id="state_cards">
+                    <div class="card text-center card mb-3 col-md-3 offset-md-1 justify-content-center text-center col-sm-6">
+                        <div class="card-header card-title">
+                            ${element.state}
+                        </div>
+                        <div class="card-body">
+                            <p>
+                                <div class="card-text">
+                                    Today's Cases: <b>${element.todayCases}</b>
+                                </div>
+                            </p>
+                            <p class="card-text">
+                                <div class="card-text">
+                                    Active Cases: <b>${element.activeCases}</b>
+                                </div>
+                            </p>
+                            <p class="card-text">
+                                <div class="card-text">
+                                    Recovered: <b>${element.recovered}</b>
+                                </div>
+                            </p>
+                            <p class="card-text">
+                                <div class="card-text">
+                                    Today's Deaths: <b>${element.todayDeaths}</b>
+                                </div>
+                            </p>
+                            <p class="card-text">
+                                <div class="card-text">
+                                    Total Tests: <b>${element.tests}</b>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+		</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>
