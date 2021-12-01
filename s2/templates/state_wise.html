@@ -28,42 +28,42 @@
 			</nav>
 		</div>
 		<div class="content">
-			{% for element in states %}
                 <div class="container row justify-content-around align-items-center" id="state_cards">
+                    {% for element in states %}
                     <div class="card text-center card mb-3 col-md-3 offset-md-1 justify-content-center text-center col-sm-6">
                         <div class="card-header card-title">
-                            ${element.state}
+                            {{element.state}}
                         </div>
                         <div class="card-body">
                             <p>
                                 <div class="card-text">
-                                    Today's Cases: <b>${element.todayCases}</b>
+                                    Today's Cases: <b>{{element.todayCases}}</b>
                                 </div>
                             </p>
                             <p class="card-text">
                                 <div class="card-text">
-                                    Active Cases: <b>${element.activeCases}</b>
+                                    Active Cases: <b>{{element.activeCases}}</b>
                                 </div>
                             </p>
                             <p class="card-text">
                                 <div class="card-text">
-                                    Recovered: <b>${element.recovered}</b>
+                                    Recovered: <b>{{element.recovered}}</b>
                                 </div>
                             </p>
                             <p class="card-text">
                                 <div class="card-text">
-                                    Today's Deaths: <b>${element.todayDeaths}</b>
+                                    Today's Deaths: <b>{{element.todayDeaths}}</b>
                                 </div>
                             </p>
                             <p class="card-text">
                                 <div class="card-text">
-                                    Total Tests: <b>${element.tests}</b>
+                                    Total Tests: <b>{{element.tests}}</b>
                                 </div>
                             </p>
                         </div>
                     </div>
+                {% endfor %}
                 </div>
-            {% endfor %}
 		</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 </body>

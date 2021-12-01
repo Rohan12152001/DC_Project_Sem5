@@ -23,13 +23,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-6 offset-3 mt-5">
-				<form action="/app/blog" method="post">
+				<form action="/app/data" method="post">
 						<div class="mb-3">
 							<label for="state" class="form-label">State</label>
 							<select class="form-select" id="state" name="state" aria-describedby="stateHelp" aria-label="Default select example">
 								<option selected>Open this select menu</option>
 								{% for state in states%}
-								<option value="${state}">${state}</option>
+									<option value="{{'%s'%state.state}}">{{state.state}}</option>
 								{% endfor %}
 							</select>
 						</div>

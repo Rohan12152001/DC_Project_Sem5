@@ -57,16 +57,19 @@ def insertData(response):
     # insert data into two DB's for backup purpose
     try:
         cursor = connection.cursor()
-        sql_insert_query = """INSERT INTO covidData values (%s,%s,%s,%s,%s,%s)"""
-        cursor.execute(sql_insert_query, (response["state"], response["todayCases"], response["active"], response["recovered"], response["todayDeaths"], response["tests"]))
+        # sql_insert_query = """INSERT INTO covidData values (%s,%s,%s,%s,%s,%s)"""
+        sql_insert_query = """UPDATE covidData SET casesToday = %s, activeCases = %s, recovered = %s, deathsToday = %s, totalTests = %s WHERE state=%s;"""
+        cursor.execute(sql_insert_query, (response["todayCases"], response["active"], response["recovered"], response["todayDeaths"], response["tests"], response["state"]))
         print("Success1")
     except Error as e:
         print("Error inserting data in MySQL table, DB1", e)
 
     try:
         cursor1 = connection1.cursor()
-        sql_insert_query = """INSERT INTO covidData values (%s,%s,%s,%s,%s,%s)"""
-        cursor1.execute(sql_insert_query, (response["state"], response["todayCases"], response["active"], response["recovered"], response["todayDeaths"], response["tests"]))
+        # sql_insert_query = """INSERT INTO covidData values (%s,%s,%s,%s,%s,%s)"""
+        # cursor1.execute(sql_insert_query, (response["state"], response["todayCases"], response["active"], response["recovered"], response["todayDeaths"], response["tests"]))
+        sql_insert_query = """UPDATE covidData SET casesToday = %s, activeCases = %s, recovered = %s, deathsToday = %s, totalTests = %s WHERE state=%s;"""
+        cursor1.execute(sql_insert_query, (response["todayCases"], response["active"], response["recovered"], response["todayDeaths"], response["tests"], response["state"]))
         print("Success2")
     except Error as e:
         print("Error inserting data in MySQL table, DB2", e)
@@ -95,7 +98,6 @@ def getAllData():
             cursor.close()
             # connection.close()
             print("MySQL connection is closed")
-
     return records
 
 def acquireLock():
@@ -164,7 +166,19 @@ def home_page():
 # EDIT Panel page
 @app.route('/app/panel')
 def panel_page():
-    return render_template('blog_form.html')
+    records = getAllData()
+    finalResponse = []
+
+    for ele in records:
+        finalData = {"state": ele["state"],
+                     "todayCases": ele["casesToday"],
+                     "activeCases": ele["activeCases"],
+                     "recovered": ele["recovered"],
+                     "todayDeaths": ele["deathsToday"],
+                     "tests": ele["totalTests"]
+                     }
+        finalResponse.append(finalData)
+    return render_template('blog_form.html', states=finalResponse)
 
 # POST DATA
 @app.route('/app/data', methods=["POST"])
@@ -201,7 +215,20 @@ def insert_data():
 # Statewise page
 @app.route('/app/statewise')
 def stateWise_page():
-    return render_template('state_wise.html')
+    records = getAllData()
+    finalResponse = []
+
+    for ele in records:
+        finalData = {"state": ele["state"],
+                     "todayCases": ele["casesToday"],
+                     "activeCases": ele["activeCases"],
+                     "recovered": ele["recovered"],
+                     "todayDeaths": ele["deathsToday"],
+                     "tests": ele["totalTests"]
+                     }
+        finalResponse.append(finalData)
+
+    return render_template('state_wise.html', states=finalResponse)
 
 if __name__ == '__main__':
     app.secret_key = "super secret key"
