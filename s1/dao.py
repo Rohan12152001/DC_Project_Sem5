@@ -4,7 +4,6 @@ from mysql.connector import Error
 from .configuration import DB, DB1, locksDB
 
 """ Database manager """
-
 # Global connection objects
 
 # DB1

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CovidStats</title>
+	<link href="{{url_for('static', filename = 'styles.css')}}" rel="stylesheet">
+	<link rel="shortcut icon" href="{{url_for('static', filename = 'icon.ico')}}" type="image/x-icon">
+	<link rel="icon" href="{{url_for('static', filename = 'icon.ico')}}" type="image/x-icon">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<body>
+	<nav class="nav navbar sticky-top navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand logo-text" href="#">
+				<img src="{{url_for('static', filename = 'logo.jpg')}}" alt="" width="45" height="35" class="d-inline-block align-text-center">
+				CovidStats
+			</a>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-6 offset-3 mt-5">
+				<form action="/app/data" method="post">
+						<div class="mb-3">
+							<label for="state" class="form-label">State</label>
+							<input type="text" class="form-control" id="state" name="state" aria-describedby="stateHelp" required>
+						</div>
+						<div class="mb-3">
+							<label for="todayCases" class="form-label">Today's Cases</label>
+							<input type="number" class="form-control" id="todayCases" name="todayCases" required>
+						</div>
+						<div class="mb-3">
+							<label for="active" class="form-label">Active Cases</label>
+							<input type="number" class="form-control" id="active" name="active" required>
+						</div>
+						<div class="mb-3">
+							<label for="recovered" class="form-label">Recovered</label>
+							<input type="number" class="form-control" id="recovered" name="recovered" required>
+						</div>
+						<div class="mb-3">
+							<label for="todayDeaths" class="form-label">Today's Deaths</label>
+							<input type="number" class="form-control" id="todayDeaths" name="todayDeaths" required>
+						</div>
+						<div class="mb-3">
+							<label for="tests" class="form-label">Total Tests</label>
+							<input type="number" class="form-control" id="tests" name="tests" required>
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+				</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+</body>
+</html>
